@@ -8,17 +8,11 @@ import {
   Calendar,
   TrendingUp,
 } from "lucide-react";
+import TopNav from "../components/TopNav";
 import BottomNavbar from "../components/BottomNav";
 
 const Home = () => {
   const [activeTab] = useState("home");
-
-  const getGreeting = () => {
-    const hour = new Date().getHours();
-    if (hour < 12) return "Good Morning";
-    if (hour < 17) return "Good Afternoon";
-    return "Good Evening";
-  };
 
   const quickActions = [
     {
@@ -71,29 +65,7 @@ const Home = () => {
   return (
     <div className="min-h-screen bg-green-50 pb-16">
       {/* Header */}
-      <header className="bg-green-600 text-white p-5 shadow-md">
-        <div className="flex justify-between items-center">
-          <div>
-            <h1 className="text-2xl font-bold">{getGreeting()}, Farmer</h1>
-            <p className="text-sm opacity-80">
-              {new Date().toLocaleDateString("en-US", {
-                weekday: "long",
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-              })}
-            </p>
-          </div>
-          <div className="flex items-center space-x-3">
-            <Bell className="w-6 h-6 text-white" />
-            <img
-              src="/api/placeholder/40/40"
-              alt="Profile"
-              className="rounded-full w-10 h-10"
-            />
-          </div>
-        </div>
-      </header>
+      <TopNav />
 
       {/* Main Content Area */}
       <div className="p-4 space-y-6">

@@ -115,7 +115,7 @@ const ChatBot: React.FC = () => {
         <div className="bg-green-600 p-4 shadow-lg flex items-center">
           <div className="flex items-center space-x-2 w-full">
             <img
-              src="/api/placeholder/40/40"
+              src="/me.jpeg"
               alt="Farm Assistant"
               className="w-10 h-10 rounded-full border-2 border-white"
             />

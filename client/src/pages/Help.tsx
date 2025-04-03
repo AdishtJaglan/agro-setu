@@ -192,9 +192,8 @@ const ChatBot: React.FC = () => {
 
   return (
     <>
-      <div className="flex flex-col h-screen max-w-md mx-auto bg-gradient-to-b from-green-50 to-green-100">
-        {/* Header with Agricultural Theme */}
-        <div className="bg-green-600 p-4 shadow-lg flex items-center">
+      <div className="flex flex-col h-screen max-w-md mx-auto bg-gradient-to-b from-gray-50 to-gray-100">
+        <div className="bg-gray-600 p-4 shadow-lg flex items-center">
           <div className="flex items-center space-x-2 w-full">
             <img
               src="/me.jpeg"
@@ -205,10 +204,10 @@ const ChatBot: React.FC = () => {
               <h1 className="text-lg font-bold text-white">
                 Farm AI Assistant
               </h1>
-              <p className="text-xs text-green-200">Agricultural Advisor</p>
+              <p className="text-xs text-gray-200">Agricultural Advisor</p>
             </div>
             <div className="flex space-x-2">
-              <button className="bg-green-500 p-2 rounded-full hover:bg-green-400 transition">
+              <button className="bg-gray-500 p-2 rounded-full hover:bg-gray-400 transition">
                 <Leaf className="text-white w-5 h-5" />
               </button>
             </div>
@@ -227,24 +226,24 @@ const ChatBot: React.FC = () => {
           {/* Empty State */}
           {messages.length === 0 && (
             <div className="absolute inset-0 flex flex-col justify-center items-center text-center p-6">
-              <Tractor className="w-24 h-24 text-green-300 mb-4" />
-              <h2 className="text-2xl font-bold text-green-800 mb-2">
+              <Tractor className="w-24 h-24 text-gray-300 mb-4" />
+              <h2 className="text-2xl font-bold text-gray-800 mb-2">
                 Welcome to Farm AI
               </h2>
-              <p className="text-green-600 mb-4">
+              <p className="text-gray-600 mb-4">
                 Ask questions about crop management, farming techniques, or
                 agricultural challenges
               </p>
               <div className="flex space-x-2">
                 <Button
                   variant="outline"
-                  className="border-green-500 text-green-700"
+                  className="border-gray-500 text-gray-700"
                 >
                   Crop Advice
                 </Button>
                 <Button
                   variant="outline"
-                  className="border-green-500 text-green-700"
+                  className="border-gray-500 text-gray-700"
                 >
                   Weather Impact
                 </Button>
@@ -266,13 +265,13 @@ const ChatBot: React.FC = () => {
               >
                 <div
                   className={`
-                max-w-[80%] p-3 rounded-2xl shadow-sm
-                ${
-                  msg.sender === "user"
-                    ? "bg-green-600 text-white"
-                    : "bg-white text-green-900 border border-green-100"
-                }
-              `}
+        max-w-[80%] p-3 rounded-2xl shadow-sm
+        ${
+          msg.sender === "user"
+            ? "bg-gray-600 text-white"
+            : "bg-white text-gray-900 border border-gray-100"
+        }
+      `}
                 >
                   {msg.sender === "bot" ? (
                     <ReactMarkdown
@@ -294,9 +293,9 @@ const ChatBot: React.FC = () => {
                 animate={{ opacity: 1 }}
                 className="flex justify-start"
               >
-                <div className="bg-white p-3 rounded-xl flex items-center border border-green-100 shadow-sm">
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin text-green-500" />
-                  <span className="text-green-500">Analyzing...</span>
+                <div className="bg-white p-3 rounded-xl flex items-center border border-gray-100 shadow-sm">
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin text-gray-500" />
+                  <span className="text-gray-500">Analyzing...</span>
                 </div>
               </motion.div>
             )}
@@ -327,7 +326,7 @@ const ChatBot: React.FC = () => {
               <input
                 type="file"
                 ref={fileInputRef}
-                onChange={() => handleFileChange()}
+                onChange={(e) => handleFileChange(e)}
                 className="hidden"
                 multiple // remove if you want single file selection
               />

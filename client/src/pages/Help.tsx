@@ -23,6 +23,7 @@ const ChatBot: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [listen, setListen] = useState(false);
   const recognitionRef = useRef<SpeechRecognition | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     const SpeechRecognition =
@@ -150,6 +151,17 @@ const ChatBot: React.FC = () => {
       startListening();
     } else {
       stopListening();
+    }
+  };
+
+  const handleFileAdd = () => {
+    fileInputRef.current?.click();
+  };
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = event.target.files;
+    if (files && files.length > 0) {
+      console.log("Selected files:", files);
     }
   };
 
@@ -305,9 +317,20 @@ const ChatBot: React.FC = () => {
           </div>
           <div className="flex w-full justify-between items-center gap-4 mt-3">
             <div className="flex justify-start items-center gap-4">
-              <div className="flex items-center justify-center border border-gray-300 p-2 rounded-full">
+              <div
+                onClick={() => handleFileAdd()}
+                className="cursor-pointer flex items-center justify-center border border-gray-300 p-2 rounded-full"
+              >
                 <Plus className="text-gray-600" />
               </div>
+              {/* Hidden file input */}
+              <input
+                type="file"
+                ref={fileInputRef}
+                onChange={() => handleFileChange()}
+                className="hidden"
+                multiple // remove if you want single file selection
+              />
               <button className="flex items-center font-bold text-gray-600 justify-between gap-2 rounded-full px-3 border border-gray-300 p-2">
                 <Sprout className="text-gray-600" />
                 Detect

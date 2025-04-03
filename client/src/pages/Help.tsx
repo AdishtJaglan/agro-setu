@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Input } from "../components/ui/input";
 import { Button } from "../components/ui/button";
-import { Send, Loader2 } from "lucide-react";
+import { Send, Loader2, Sprout, Mic, Plus, AudioLines } from "lucide-react";
 import { GoogleGenAI } from "@google/genai";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -21,6 +21,53 @@ const ChatBot: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
+  const [listen, setListen] = useState(false);
+  const recognitionRef = useRef<SpeechRecognition | null>(null);
+
+  useEffect(() => {
+    const SpeechRecognition =
+      (
+        window as typeof window & {
+          SpeechRecognition?: typeof SpeechRecognition;
+          webkitSpeechRecognition?: typeof SpeechRecognition;
+        }
+      ).SpeechRecognition ||
+      (
+        window as typeof window & {
+          SpeechRecognition?: typeof SpeechRecognition;
+          webkitSpeechRecognition?: typeof SpeechRecognition;
+        }
+      ).webkitSpeechRecognition;
+    if (!SpeechRecognition) {
+      console.error("Browser does not support Speech Recognition API");
+      return;
+    }
+
+    const recognition: SpeechRecognition = new SpeechRecognition();
+    recognition.continuous = true;
+    recognition.interimResults = false;
+    recognition.lang = "en-US";
+    recognitionRef.current = recognition;
+
+    recognition.onresult = (event: SpeechRecognitionEvent) => {
+      let finalTranscript = "";
+      for (let i = event.resultIndex; i < event.results.length; i++) {
+        if (event.results[i].isFinal) {
+          finalTranscript += event.results[i][0].transcript + " ";
+        }
+      }
+      setInput((prev) => prev + finalTranscript);
+    };
+
+    recognition.onerror = (event: SpeechRecognitionErrorEvent) => {
+      console.error("Speech recognition error:", event.error);
+      setListen(false);
+    };
+
+    recognition.onend = () => {
+      setListen(false);
+    };
+  }, []);
 
   const fetchGeminiResponse = async (userMessage: string): Promise<void> => {
     setLoading(true);
@@ -80,6 +127,29 @@ const ChatBot: React.FC = () => {
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && !loading) {
       handleSendMessage();
+    }
+  };
+
+  const startListening = () => {
+    if (recognitionRef.current && !listen) {
+      recognitionRef.current.start();
+    }
+  };
+
+  const stopListening = () => {
+    if (recognitionRef.current && listen) {
+      recognitionRef.current.stop();
+    }
+  };
+
+  const handleSpeechToText = () => {
+    setListen(!listen);
+
+    if (!listen) {
+      console.log("listening");
+      startListening();
+    } else {
+      stopListening();
     }
   };
 
@@ -222,27 +292,54 @@ const ChatBot: React.FC = () => {
         </div>
 
         {/* Input Area with Enhanced Design */}
-        <div className="p-4 bg-white border-t border-green-100 shadow-up">
+        <div className="p-4 bg-white border-green-100 shadow-up rounded-t-3xl">
           <div className="flex items-center space-x-2">
             <Input
-              className="flex-1 bg-green-50 border-green-200 text-green-800 focus:ring-2 focus:ring-green-300"
-              placeholder="Ask a farming question..."
+              className="flex-1 border border-gray-300 py-6 px-3 rounded-3xl"
+              placeholder=" Ask a question..."
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyPress}
               disabled={loading}
             />
-            <Button
-              onClick={handleSendMessage}
-              disabled={loading || !input.trim()}
-              className="bg-green-600 hover:bg-green-700 rounded-full p-2"
-            >
-              {loading ? (
-                <Loader2 className="h-5 w-5 animate-spin" />
-              ) : (
-                <Send className="h-5 w-5" />
-              )}
-            </Button>
+          </div>
+          <div className="flex w-full justify-between items-center gap-4 mt-3">
+            <div className="flex justify-start items-center gap-4">
+              <div className="flex items-center justify-center border border-gray-300 p-2 rounded-full">
+                <Plus className="text-gray-600" />
+              </div>
+              <button className="flex items-center font-bold text-gray-600 justify-between gap-2 rounded-full px-3 border border-gray-300 p-2">
+                <Sprout className="text-gray-600" />
+                Detect
+              </button>
+            </div>
+            <div className="flex w-full justify-end gap-4">
+              <button
+                className={`${
+                  !listen
+                    ? "border border-gray-300 rounded-full"
+                    : "bg-gray-600 rounded-full"
+                } flex items-center justify-center`}
+                onClick={() => handleSpeechToText()}
+              >
+                {listen ? (
+                  <AudioLines className="h-10 w-10 p-2 text-white animate-pulse" />
+                ) : (
+                  <Mic className="h-10 w-10 p-2 text-gray-600" />
+                )}
+              </button>
+              <button
+                onClick={handleSendMessage}
+                disabled={loading || !input.trim()}
+                className="bg-gray-600 rounded-full p-2 flex items-center justify-center"
+              >
+                {loading ? (
+                  <Loader2 className="h-6 w-6 p-0.5 animate-spin text-white" />
+                ) : (
+                  <Send className="h-6 w-6 p-0.5 text-white" />
+                )}
+              </button>
+            </div>
           </div>
         </div>
       </div>

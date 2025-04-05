@@ -7,6 +7,7 @@ import Buy from "./pages/shop/Buy";
 import Sell from "./pages/shop/Sell";
 import Rent from "./pages/shop/Rent";
 import List from "./pages/shop/List";
+import Jobs from "./pages/Jobs";
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
         <Route path="/home" element={<Home />}></Route>
         <Route path="/help" element={<ChatBot />}></Route>
         <Route path="/shop" element={<Shop />}></Route>
+        <Route path="/find" element={<Jobs />}></Route>
         <Route path="/shop/buy" element={<Buy />}></Route>
         <Route path="/shop/sell" element={<Sell />}></Route>
         <Route path="/shop/rent" element={<Rent />}></Route>

@@ -6,6 +6,7 @@ import ChatBot from "./pages/Help";
 import Buy from "./pages/shop/Buy";
 import Sell from "./pages/shop/Sell";
 import Rent from "./pages/shop/Rent";
+import List from "./pages/shop/List";
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
         <Route path="/shop/buy" element={<Buy />}></Route>
         <Route path="/shop/sell" element={<Sell />}></Route>
         <Route path="/shop/rent" element={<Rent />}></Route>
+        <Route path="/shop/list" element={<List />}></Route>
         <Route path="*" element={<Login />}></Route>
       </Routes>
     </Router>

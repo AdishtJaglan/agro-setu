@@ -1,10 +1,42 @@
 import { useNavigate } from "react-router-dom";
-import { ShoppingCart, Tags, Building } from "lucide-react";
+import {
+  ShoppingCart,
+  ChartNoAxesCombined,
+  Tags,
+  Building,
+} from "lucide-react";
 import TopNav from "../components/TopNav";
 import BottomNavbar from "../components/BottomNav";
 
 const Shop = () => {
   const navigate = useNavigate();
+
+  const data = [
+    {
+      heading: "Buy",
+      text: "Browse crops, farming equipment, and more",
+      icon: ShoppingCart,
+      path: "/shop/buy",
+    },
+    {
+      heading: "Sell",
+      text: "List your crops, farming equipment for sale",
+      icon: Tags,
+      path: "/shop/sell",
+    },
+    {
+      heading: "Rent",
+      text: "Find rental cold storage spaces",
+      icon: Building,
+      path: "/shop/rent",
+    },
+    {
+      heading: "List",
+      text: "List your rental cold storage spaces",
+      icon: ChartNoAxesCombined,
+      path: "/shop/list",
+    },
+  ];
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
@@ -19,60 +51,25 @@ const Shop = () => {
 
         <div className="grid grid-cols-1 gap-6 w-full max-w-md">
           {/* Buy Option */}
-          <button
-            onClick={() => navigate("/shop/buy")}
-            className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition"
-          >
-            <div className="p-6 flex items-center text-left">
-              <div className="bg-gray-100 p-4 rounded-full mr-4">
-                <ShoppingCart className="h-8 w-8 text-gray-600" />
+          {data.map((entry, idx) => (
+            <button
+              key={idx}
+              onClick={() => navigate(entry.path)}
+              className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition"
+            >
+              <div className="p-6 flex items-center text-left">
+                <div className="bg-gray-100 p-4 rounded-full mr-4">
+                  <entry.icon className="h-8 w-8 text-gray-600" />
+                </div>
+                <div>
+                  <h3 className="font-bold text-lg text-gray-800">
+                    {entry.heading}
+                  </h3>
+                  <p className="text-gray-600">{entry.text}</p>
+                </div>
               </div>
-              <div>
-                <h3 className="font-bold text-lg text-gray-800">Buy Storage</h3>
-                <p className="text-gray-600">
-                  Browse crops, farming equipment, and more
-                </p>
-              </div>
-            </div>
-          </button>
-
-          {/* Sell Option */}
-          <button
-            onClick={() => navigate("/shop/sell")}
-            className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition"
-          >
-            <div className="p-6 flex items-center text-left">
-              <div className="bg-gray-100 p-4 rounded-full mr-4">
-                <Tags className="h-8 w-8 text-gray-600" />
-              </div>
-              <div>
-                <h3 className="font-bold text-lg text-gray-800 ">Sell</h3>
-                <p className="text-gray-600">
-                  List your crops, farming equipment for sale
-                </p>
-              </div>
-            </div>
-          </button>
-
-          {/* Rent Option */}
-          <button
-            onClick={() => navigate("/shop/rent")}
-            className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition"
-          >
-            <div className="p-6 flex items-center text-left">
-              <div className="bg-gray-100 p-4 rounded-full mr-4">
-                <Building className="h-8 w-8 text-gray-600" />
-              </div>
-              <div>
-                <h3 className="font-bold text-lg text-gray-800">
-                  Rent Storage
-                </h3>
-                <p className="text-gray-600">
-                  Find or list rental cold storage space
-                </p>
-              </div>
-            </div>
-          </button>
+            </button>
+          ))}
         </div>
       </main>
 

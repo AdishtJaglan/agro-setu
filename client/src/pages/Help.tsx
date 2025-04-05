@@ -1,14 +1,14 @@
 import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Input } from "../components/ui/input";
-import { Button } from "../components/ui/button";
 import { Send, Loader2, Sprout, Mic, Plus, AudioLines } from "lucide-react";
 import { GoogleGenAI } from "@google/genai";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneLight } from "react-syntax-highlighter/dist/esm/styles/prism";
-import { Leaf, Tractor } from "lucide-react";
+import { Leaf } from "lucide-react";
+import FarmAIEmptyState from "../components/EmptyState";
 
 interface Message {
   id: string;
@@ -192,8 +192,8 @@ const ChatBot: React.FC = () => {
 
   return (
     <>
-      <div className="flex flex-col h-screen max-w-md mx-auto bg-gradient-to-b from-gray-50 to-gray-100">
-        <div className="bg-gray-600 p-4 shadow-lg flex items-center">
+      <div className="flex flex-col h-screen max-w-md mx-auto ">
+        <div className="bg-emerald-600 p-4 shadow-lg flex items-center">
           <div className="flex items-center space-x-2 w-full">
             <img
               src="/me.jpeg"
@@ -207,8 +207,8 @@ const ChatBot: React.FC = () => {
               <p className="text-xs text-gray-200">Agricultural Advisor</p>
             </div>
             <div className="flex space-x-2">
-              <button className="bg-gray-500 p-2 rounded-full hover:bg-gray-400 transition">
-                <Leaf className="text-white w-5 h-5" />
+              <button className="bg-gray-200 p-2 rounded-full hover:bg-gray-400 transition">
+                <Leaf className="text-green-600 w-5 h-5" />
               </button>
             </div>
           </div>
@@ -224,32 +224,7 @@ const ChatBot: React.FC = () => {
           }}
         >
           {/* Empty State */}
-          {messages.length === 0 && (
-            <div className="absolute inset-0 flex flex-col justify-center items-center text-center p-6">
-              <Tractor className="w-24 h-24 text-gray-300 mb-4" />
-              <h2 className="text-2xl font-bold text-gray-800 mb-2">
-                Welcome to Farm AI
-              </h2>
-              <p className="text-gray-600 mb-4">
-                Ask questions about crop management, farming techniques, or
-                agricultural challenges
-              </p>
-              <div className="flex space-x-2">
-                <Button
-                  variant="outline"
-                  className="border-gray-500 text-gray-700"
-                >
-                  Crop Advice
-                </Button>
-                <Button
-                  variant="outline"
-                  className="border-gray-500 text-gray-700"
-                >
-                  Weather Impact
-                </Button>
-              </div>
-            </div>
-          )}
+          {messages.length === 0 && <FarmAIEmptyState />}
 
           <AnimatePresence>
             {messages.map((msg) => (
@@ -268,7 +243,7 @@ const ChatBot: React.FC = () => {
         max-w-[80%] p-3 rounded-2xl shadow-sm
         ${
           msg.sender === "user"
-            ? "bg-gray-600 text-white"
+            ? "bg-emerald-600 text-white"
             : "bg-white text-gray-900 border border-gray-100"
         }
       `}
@@ -320,7 +295,7 @@ const ChatBot: React.FC = () => {
                 onClick={() => handleFileAdd()}
                 className="cursor-pointer flex items-center justify-center border border-gray-300 p-2 rounded-full"
               >
-                <Plus className="text-gray-600" />
+                <Plus className="text-green-600" />
               </div>
               {/* Hidden file input */}
               <input
@@ -331,7 +306,7 @@ const ChatBot: React.FC = () => {
                 multiple // remove if you want single file selection
               />
               <button className="flex items-center font-bold text-gray-600 justify-between gap-2 rounded-full px-3 border border-gray-300 p-2">
-                <Sprout className="text-gray-600" />
+                <Sprout className="text-green-600" />
                 Detect
               </button>
             </div>
@@ -347,7 +322,7 @@ const ChatBot: React.FC = () => {
                 {listen ? (
                   <AudioLines className="h-10 w-10 p-2 text-white animate-pulse" />
                 ) : (
-                  <Mic className="h-10 w-10 p-2 text-gray-600" />
+                  <Mic className="h-10 w-10 p-2 text-green-600" />
                 )}
               </button>
               <button

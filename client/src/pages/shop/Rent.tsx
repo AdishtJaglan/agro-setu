@@ -5,7 +5,7 @@ import { Filter, Search, MapPin, Star } from "lucide-react";
 
 const Rent = () => {
   const [showFilters, setShowFilters] = useState(false);
-  const [priceRange, setPriceRange] = useState([0, 5000]);
+  const [priceRange, setPriceRange] = useState([0, 500000]);
   const [capacity, setCapacity] = useState([0, 10000]);
   const [duration, setDuration] = useState("any");
   const [searchQuery, setSearchQuery] = useState("");
@@ -15,22 +15,22 @@ const Rent = () => {
     {
       id: 1,
       name: "Industrial Cold Storage Facility",
-      location: "Springfield County",
+      location: "Pune, Maharashtra",
       capacity: 5000,
-      price: 2500,
+      price: 200000,
       period: "month",
-      image: "/api/placeholder/300/200",
+      image: "/rent/industrial-cold-storage.jpg",
       rating: 4.5,
       amenities: ["24/7 Access", "Security System", "Loading Dock"],
     },
     {
       id: 2,
       name: "Commercial Freezer Unit",
-      location: "Hartfield",
+      location: "Coimbatore, Tamil Nadu",
       capacity: 3200,
-      price: 1800,
+      price: 150000,
       period: "month",
-      image: "/api/placeholder/300/200",
+      image: "/rent/commericial-freezer.webp",
       rating: 4.2,
       amenities: [
         "Temperature Control",
@@ -41,44 +41,44 @@ const Rent = () => {
     {
       id: 3,
       name: "Small Cold Room",
-      location: "West Plains",
+      location: "Indore, Madhya Pradesh",
       capacity: 800,
-      price: 650,
+      price: 55000,
       period: "month",
-      image: "/api/placeholder/300/200",
+      image: "/rent/small-cold-room.avif",
       rating: 4.7,
       amenities: ["Flexible Terms", "Easy Access", "City Center"],
     },
     {
       id: 4,
       name: "Large Distribution Cold Storage",
-      location: "North District",
+      location: "Bahadurgarh, Haryana",
       capacity: 8500,
-      price: 4200,
+      price: 350000,
       period: "month",
-      image: "/api/placeholder/300/200",
+      image: "/rent/large-cold-storage.avif",
       rating: 4.8,
       amenities: ["Highway Access", "Large Truck Bay", "24/7 Security"],
     },
     {
       id: 5,
       name: "Seasonal Storage Space",
-      location: "Eastview",
+      location: "Nagpur, Maharashtra",
       capacity: 2500,
-      price: 3800,
+      price: 320000,
       period: "season",
-      image: "/api/placeholder/300/200",
+      image: "/rent/Seasonal-Storage.webp",
       rating: 4.3,
       amenities: ["3-Month Minimum", "Harvest Season Priority", "Sorting Area"],
     },
     {
       id: 6,
       name: "Mobile Cold Storage Unit",
-      location: "Flexible",
+      location: "Pan India",
       capacity: 1200,
-      price: 1500,
+      price: 60000,
       period: "week",
-      image: "/api/placeholder/300/200",
+      image: "/rent/mobile-cs.jpg",
       rating: 4.6,
       amenities: [
         "Transportable",
@@ -149,11 +149,11 @@ const Rent = () => {
                 Price Range (per period)
               </label>
               <div className="flex items-center space-x-4">
-                <span className="text-gray-500">${priceRange[0]}</span>
+                <span className="text-gray-500">₹{priceRange[0]}</span>
                 <input
                   type="range"
                   min="0"
-                  max="5000"
+                  max="500000"
                   step="100"
                   className="flex-1 accent-gray-600"
                   value={priceRange[1]}
@@ -161,7 +161,7 @@ const Rent = () => {
                     setPriceRange([priceRange[0], parseInt(e.target.value)])
                   }
                 />
-                <span className="text-gray-500">${priceRange[1]}</span>
+                <span className="text-gray-500">₹{priceRange[1]}</span>
               </div>
             </div>
 
@@ -208,7 +208,7 @@ const Rent = () => {
               <button
                 className="px-4 py-2 border border-gray-300 rounded-md text-gray-600"
                 onClick={() => {
-                  setPriceRange([0, 5000]);
+                  setPriceRange([0, 500000]);
                   setCapacity([0, 10000]);
                   setDuration("any");
                   setSearchQuery("");

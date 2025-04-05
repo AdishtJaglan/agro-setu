@@ -199,15 +199,15 @@ const Buy = () => {
             {categories.map((category) => (
               <button
                 key={category.id}
-                className={`px-4 py-2 rounded-full flex items-center space-x-2 whitespace-nowrap ${
+                className={`px-4 py-2 rounded-full flex items-center space-x-2 whitespace-nowrap transition-colors duration-200 ${
                   activeCategory === category.id
-                    ? "bg-gray-800 text-emerald-600"
-                    : "bg-gray-100 text-green-600"
+                    ? "bg-emerald-600 text-white"
+                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                 }`}
                 onClick={() => setActiveCategory(category.id)}
               >
                 {category.icon}
-                <span>{category.label}</span>
+                <span className="font-medium text-sm">{category.label}</span>
               </button>
             ))}
           </div>

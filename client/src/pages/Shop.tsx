@@ -59,7 +59,7 @@ const Shop = () => {
             >
               <div className="p-6 flex items-center text-left">
                 <div className="bg-gray-100 p-4 rounded-full mr-4">
-                  <entry.icon className="h-8 w-8 text-gray-600" />
+                  <entry.icon className="h-8 w-8 text-green-600" />
                 </div>
                 <div>
                   <h3 className="font-bold text-lg text-gray-800">

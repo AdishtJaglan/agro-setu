@@ -311,7 +311,7 @@ const Rent = () => {
                       </div>
 
                       <div className="mt-4 flex space-x-2">
-                        <button className="flex-1 bg-gray-600 text-white py-2 rounded-md hover:bg-gray-700 transition">
+                        <button className="flex-1 bg-green-600 text-white py-2 rounded-md hover:bg-gray-700 transition">
                           Rent Now
                         </button>
                         <button className="flex-1 border border-gray-300 text-gray-600 py-2 rounded-md hover:bg-gray-100 transition">

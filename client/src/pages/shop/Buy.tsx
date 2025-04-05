@@ -201,8 +201,8 @@ const Buy = () => {
                 key={category.id}
                 className={`px-4 py-2 rounded-full flex items-center space-x-2 whitespace-nowrap ${
                   activeCategory === category.id
-                    ? "bg-gray-600 text-white"
-                    : "bg-gray-100 text-gray-700"
+                    ? "bg-gray-800 text-emerald-600"
+                    : "bg-gray-100 text-green-600"
                 }`}
                 onClick={() => setActiveCategory(category.id)}
               >

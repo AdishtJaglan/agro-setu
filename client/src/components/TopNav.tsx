@@ -9,7 +9,7 @@ const TopNav = () => {
   };
 
   return (
-    <header className="bg-green-600 text-white p-5 shadow-md">
+    <header className="bg-emerald-600 text-white p-5 shadow-md">
       <div className="flex justify-between items-center">
         <div>
           <h1 className="text-2xl font-bold">{getGreeting()}, Farmer</h1>

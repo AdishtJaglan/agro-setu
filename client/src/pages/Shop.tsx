@@ -46,9 +46,7 @@ const Shop = () => {
                 <Tags className="h-8 w-8 text-gray-600" />
               </div>
               <div>
-                <h3 className="font-bold text-lg text-gray-800 ">
-                  Sell Storage
-                </h3>
+                <h3 className="font-bold text-lg text-gray-800 ">Sell</h3>
                 <p className="text-gray-600">
                   List your crops, farming equipment for sale
                 </p>

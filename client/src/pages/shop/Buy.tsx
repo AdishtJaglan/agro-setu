@@ -16,7 +16,7 @@ const Buy = () => {
       name: "Organic Wheat Seeds",
       category: "crops",
       price: 129,
-      image: "/api/placeholder/150/150",
+      image: "/buy/wheat_seeds.webp",
       rating: 4.5,
     },
     {
@@ -24,7 +24,7 @@ const Buy = () => {
       name: "Corn Seeds (High Yield)",
       category: "crops",
       price: 199,
-      image: "/api/placeholder/150/150",
+      image: "/buy/corn.jpg",
       rating: 4.2,
     },
     {
@@ -32,7 +32,7 @@ const Buy = () => {
       name: "Tomato Seedlings",
       category: "crops",
       price: 79,
-      image: "/api/placeholder/150/150",
+      image: "/buy/tomato.cms",
       rating: 4.7,
     },
     {
@@ -40,7 +40,7 @@ const Buy = () => {
       name: "Compact Tractor",
       category: "equipment",
       price: 8499,
-      image: "/api/placeholder/150/150",
+      image: "/buy/tractor.avif",
       rating: 4.8,
     },
     {
@@ -48,7 +48,7 @@ const Buy = () => {
       name: "Irrigation System",
       category: "equipment",
       price: 1299,
-      image: "/api/placeholder/150/150",
+      image: "/buy/pipes.webp",
       rating: 4.3,
     },
     {
@@ -56,7 +56,7 @@ const Buy = () => {
       name: "Handheld Seeder",
       category: "equipment",
       price: 349,
-      image: "/api/placeholder/150/150",
+      image: "/buy/seeder.jpg",
       rating: 4.1,
     },
     {
@@ -64,15 +64,15 @@ const Buy = () => {
       name: "Storage Silo",
       category: "amenities",
       price: 5999,
-      image: "/api/placeholder/150/150",
+      image: "/buy/silo.jpg",
       rating: 4.6,
     },
     {
       id: 8,
-      name: "Farm Stand Kit",
+      name: "Farm Kit",
       category: "amenities",
       price: 899,
-      image: "/api/placeholder/150/150",
+      image: "/buy/farm-kit.jpg",
       rating: 4.4,
     },
     {
@@ -80,7 +80,7 @@ const Buy = () => {
       name: "Weather Station",
       category: "amenities",
       price: 599,
-      image: "/api/placeholder/150/150",
+      image: "/buy/weather-station.jpg",
       rating: 4.9,
     },
   ];

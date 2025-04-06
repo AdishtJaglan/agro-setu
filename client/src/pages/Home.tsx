@@ -8,27 +8,29 @@ import {
   Calendar,
   TrendingUp,
 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import TopNav from "../components/TopNav";
 import BottomNavbar from "../components/BottomNav";
 
-const Home = () => {
+const Home: React.FC = () => {
+  const { t } = useTranslation();
   const [activeTab] = useState("home");
 
   const quickActions = [
     {
       icon: Tractor,
-      title: "Crop Planning",
-      description: "Plan your next crop cycle",
+      title: t("cropPlanning"),
+      description: t("cropPlanningDesc"),
     },
     {
       icon: ShoppingBag,
-      title: "Market Prices",
-      description: "Check latest market rates",
+      title: t("marketPrices"),
+      description: t("marketPricesDesc"),
     },
     {
       icon: Droplet,
-      title: "Irrigation",
-      description: "Water management",
+      title: t("irrigation"),
+      description: t("irrigationDesc"),
     },
   ];
 
@@ -52,61 +54,59 @@ const Home = () => {
   const financialInsights = [
     {
       icon: TrendingUp,
-      title: "Total Earnings",
+      title: t("totalEarnings"),
       value: "₹1,25,000",
     },
     {
       icon: Calendar,
-      title: "Expected Harvest",
-      value: "Next 30 Days",
+      title: t("expectedHarvest"),
+      value: t("next30Days"),
     },
   ];
 
   return (
     <div className="min-h-screen bg-green-50 pb-16">
-      {/* Header */}
       <TopNav />
 
-      {/* Main Content Area */}
       <div className="p-4 space-y-6">
-        {/* Weather and Alert Section */}
         <div className="grid grid-row-2 gap-4">
-          {/* Weather Card */}
           <div className="bg-white rounded-xl p-4 shadow-md">
             <div className="flex justify-between items-center">
               <div>
-                <h2 className="text-lg font-semibold">New Delhi</h2>
-                <p className="text-sm text-gray-600">Partly Cloudy</p>
+                <h2 className="text-lg font-semibold">{t("location")}</h2>
+                <p className="text-sm text-gray-600">{t("weatherStatus")}</p>
               </div>
               <CloudRain className="w-12 h-12 text-blue-400" />
             </div>
-            <div className="mt-4 flex items-center justify-between rounded-lg px-6 py-4  backdrop-blur-md">
+            <div className="mt-4 flex items-center justify-between rounded-lg px-6 py-4 backdrop-blur-md">
               <div className="flex items-center gap-8 text-zinc-500">
-                <p className="text-lg font-medium">🌧 42%</p>
-                <p className="text-lg font-medium">💨 6.1 km/h</p>
+                <p className="text-lg font-medium">
+                  {t("humidity", { value: 42 })}
+                </p>
+                <p className="text-lg font-medium">
+                  {t("wind", { value: 6.1 })}
+                </p>
               </div>
               <div className="text-grey-700">
                 <span className="text-4xl font-extrabold tracking-wide">
-                  28°C
+                  {t("temperature")}
                 </span>
               </div>
             </div>
           </div>
 
-          {/* Alert Card */}
           <div className="bg-yellow-100 rounded-xl p-4 border-l-4 border-yellow-500">
             <div className="flex items-center">
               <Bell className="w-6 h-6 mr-3 text-yellow-600" />
-              <p className="text-sm font-medium">
-                Rainfall expected in next 48 hours
-              </p>
+              <p className="text-sm font-medium">{t("rainAlert")}</p>
             </div>
           </div>
         </div>
 
-        {/* Quick Actions */}
         <div>
-          <h2 className="text-xl font-semibold mb-4">Quick Actions</h2>
+          <h2 className="text-xl font-semibold mb-4">
+            {t("quickActionsTitle")}
+          </h2>
           <div className="grid grid-cols-3 gap-4">
             {quickActions.map((action, index) => (
               <div
@@ -123,9 +123,8 @@ const Home = () => {
           </div>
         </div>
 
-        {/* Crop Health */}
         <div>
-          <h2 className="text-xl font-semibold mb-4">My Crops</h2>
+          <h2 className="text-xl font-semibold mb-4">{t("myCrops")}</h2>
           <div className="space-y-4">
             {cropHealth.map((crop, index) => (
               <div key={index} className="bg-white rounded-xl p-4 shadow-md">
@@ -133,7 +132,10 @@ const Home = () => {
                   <div>
                     <h3 className="font-semibold">{crop.crop}</h3>
                     <p className="text-sm text-gray-600">
-                      {crop.stage} | {crop.area}
+                      {t("stageAndArea", {
+                        stage: crop.stage,
+                        area: crop.area,
+                      })}
                     </p>
                   </div>
                   <div className="flex items-center space-x-2">
@@ -157,7 +159,7 @@ const Home = () => {
                     ></div>
                   </div>
                   <p className="text-xs text-gray-600 mt-1">
-                    {crop.progress}% Completed
+                    {t("progressCompleted", { progress: crop.progress })}
                   </p>
                 </div>
               </div>
@@ -165,9 +167,10 @@ const Home = () => {
           </div>
         </div>
 
-        {/* Financial Insights */}
         <div>
-          <h2 className="text-xl font-semibold mb-4">Financial Overview</h2>
+          <h2 className="text-xl font-semibold mb-4">
+            {t("financialOverview")}
+          </h2>
           <div className="grid grid-cols-2 gap-4">
             {financialInsights.map((insight, index) => (
               <div
@@ -187,7 +190,6 @@ const Home = () => {
         </div>
       </div>
 
-      {/* Bottom Navbar */}
       <BottomNavbar activeTab={activeTab} />
     </div>
   );

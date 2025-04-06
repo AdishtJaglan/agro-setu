@@ -8,6 +8,7 @@ import Sell from "./pages/shop/Sell";
 import Rent from "./pages/shop/Rent";
 import List from "./pages/shop/List";
 import Jobs from "./pages/Jobs";
+import "./i18";
 
 const App = () => {
   return (

@@ -1,4 +1,5 @@
 import { Bell } from "lucide-react";
+import LanguageToggle from "./LangSelect";
 
 const TopNav = () => {
   const getGreeting = () => {
@@ -22,12 +23,14 @@ const TopNav = () => {
             })}
           </p>
         </div>
-        <div className="flex items-center space-x-3">
-          <Bell className="w-5 h-5 text-white" />
+
+        <div className="flex items-center space-x-4">
+          <LanguageToggle />
+          <Bell className="w-5 h-5 text-white cursor-pointer hover:text-emerald-200 transition-colors" />
           <img
             src="/me.jpeg"
             alt="Profile"
-            className="rounded-full w-10 h-10"
+            className="rounded-full w-10 h-10 border-2 border-emerald-400"
           />
         </div>
       </div>

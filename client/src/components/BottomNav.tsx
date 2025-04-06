@@ -1,18 +1,21 @@
 import { Home, Search, ShoppingCart, HelpCircle, Leaf } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 interface BottomNavbarProps {
   activeTab: string;
 }
 
 const BottomNavbar = ({ activeTab }: BottomNavbarProps) => {
+  const { t } = useTranslation("bottomnav");
   const navigate = useNavigate();
+
   const navItems = [
-    { icon: Home, label: "Home", value: "home" },
-    { icon: Search, label: "Find", value: "find" },
-    { icon: ShoppingCart, label: "Shop", value: "shop" },
-    { icon: HelpCircle, label: "Help", value: "help" },
-    { icon: Leaf, label: "Farm", value: "farm" },
+    { icon: Home, label: t("home", "Home"), value: "home" },
+    { icon: Search, label: t("find", "Find"), value: "find" },
+    { icon: ShoppingCart, label: t("shop", "Shop"), value: "shop" },
+    { icon: HelpCircle, label: t("help", "Help"), value: "help" },
+    { icon: Leaf, label: t("farm", "Farm"), value: "farm" },
   ];
 
   const onTabChange = (url: string) => {

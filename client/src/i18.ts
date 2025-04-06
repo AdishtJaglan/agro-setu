@@ -13,6 +13,12 @@ import rentEn from "./locales/en/rent.json";
 import rentHi from "./locales/hi/rent.json";
 import listEn from "./locales/en/list.json";
 import listHi from "./locales/hi/list.json";
+import questionsEn from "./locales/en/questions.json";
+import questionsHi from "./locales/hi/questions.json";
+import topnavEn from "./locales/en/topnav.json";
+import topnavHi from "./locales/hi/topnav.json";
+import bottomnavEn from "./locales/en/bottomnav.json";
+import bottomnavHi from "./locales/hi/bottomnav.json";
 
 i18n
   .use(LanguageDetector)
@@ -20,7 +26,17 @@ i18n
   .init({
     fallbackLng: "en",
     debug: false,
-    ns: ["home", "jobs", "chatbot", "shop", "rent", "list"], // define namespaces
+    ns: [
+      "home",
+      "jobs",
+      "chatbot",
+      "shop",
+      "rent",
+      "list",
+      "questions",
+      "topnav",
+      "bottomnav",
+    ], // define namespaces
     defaultNS: "home", // set a default namespace
     resources: {
       en: {
@@ -30,6 +46,9 @@ i18n
         shop: shopEn,
         rent: rentEn,
         list: listEn,
+        questions: questionsEn,
+        topnav: topnavEn,
+        bottomnav: bottomnavEn,
       },
       hi: {
         home: homeHi,
@@ -38,6 +57,9 @@ i18n
         shop: shopHi,
         rent: rentHi,
         list: listHi,
+        questions: questionsHi,
+        topnav: topnavHi,
+        bottomnav: bottomnavHi,
       },
     },
     interpolation: {

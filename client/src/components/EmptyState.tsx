@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Button } from "./ui/button";
 import { Card, CardContent } from "./ui/card";
 import { Crop, Leaf, Shield, Cloud } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 // Define our types
 type CategoryKey = "crops" | "soil" | "pests" | "weather";
@@ -22,57 +23,48 @@ interface CategoryInfo {
 }
 
 const FarmAIEmptyState: React.FC = () => {
+  const { t } = useTranslation("questions");
   const [selectedCategory, setSelectedCategory] = useState<CategoryKey | null>(
     null
   );
 
-  const commonQuestions: QuestionsByCategory = {
-    crops: [
-      "Optimal spacing for corn planting",
-      "Early signs of blight in tomatoes",
-      "Best cover crops for nitrogen fixation",
-    ],
-    soil: [
-      "Improving clay soil drainage",
-      "Home methods for testing soil pH",
-      "Best timing for compost application",
-    ],
-    pests: [
-      "Natural aphid control methods",
-      "Strategies against corn rootworm",
-      "Companion plants that deter pests",
-    ],
-    weather: [
-      "Preparing for prolonged drought",
-      "Crops resilient to unpredictable rainfall",
-      "Frost protection in orchards",
-    ],
-  };
+  // Get common questions from translations. Define these in your translation JSON file
+  // using a key "commonQuestions" with keys for each category.
+  const commonQuestions = t("commonQuestions", {
+    returnObjects: true,
+    defaultValue: {
+      crops: [],
+      soil: [],
+      pests: [],
+      weather: [],
+    },
+  }) as QuestionsByCategory;
 
+  // Define category information with translated titles.
   const categories: Record<CategoryKey, CategoryInfo> = {
     crops: {
-      title: "Crops",
+      title: t("categories.crops", "Crops"),
       icon: <Crop size={20} />,
       color: "bg-emerald-50",
       hoverColor: "hover:bg-emerald-100",
       textColor: "text-emerald-700",
     },
     soil: {
-      title: "Soil",
+      title: t("categories.soil", "Soil"),
       icon: <Leaf size={20} />,
       color: "bg-green-50",
       hoverColor: "hover:bg-green-100",
       textColor: "text-green-700",
     },
     pests: {
-      title: "Pests",
+      title: t("categories.pests", "Pests"),
       icon: <Shield size={20} />,
       color: "bg-gray-50",
       hoverColor: "hover:bg-gray-100",
       textColor: "text-gray-700",
     },
     weather: {
-      title: "Weather",
+      title: t("categories.weather", "Weather"),
       icon: <Cloud size={20} />,
       color: "bg-gray-50",
       hoverColor: "hover:bg-gray-100",
@@ -88,16 +80,21 @@ const FarmAIEmptyState: React.FC = () => {
           <div className="bg-emerald-600 p-3 rounded-xl">
             <Leaf className="w-8 h-8 text-white" />
           </div>
-          <h1 className="text-2xl font-semibold text-gray-800 ml-3">Farm AI</h1>
+          <h1 className="text-2xl font-semibold text-gray-800 ml-3">
+            {t("farmAITitle", "Farm AI")}
+          </h1>
         </div>
 
         {/* Welcoming text */}
         <div className="text-center mb-8">
           <h2 className="text-xl font-medium text-gray-700 mb-2">
-            Smart farming assistance
+            {t("welcomeTitle", "Smart farming assistance")}
           </h2>
           <p className="text-gray-500">
-            Get expert advice on agricultural management and planning
+            {t(
+              "welcomeSubtitle",
+              "Get expert advice on agricultural management and planning"
+            )}
           </p>
         </div>
 
@@ -129,13 +126,14 @@ const FarmAIEmptyState: React.FC = () => {
           ))}
         </div>
 
-        {/* Questions Card - Improved */}
+        {/* Questions Card */}
         {selectedCategory && (
           <Card className="w-full mb-6 border-gray-200 shadow-sm overflow-hidden">
             <CardContent className="p-0">
               <div className="bg-gray-50 px-4 py-3 border-b border-gray-100">
                 <h3 className="text-xs font-medium text-gray-500 uppercase tracking-wide">
-                  Ask about {categories[selectedCategory].title.toLowerCase()}
+                  {t("askAbout", "Ask about")}{" "}
+                  {categories[selectedCategory].title.toLowerCase()}
                 </h3>
               </div>
               <div className="divide-y divide-gray-100">
@@ -155,7 +153,10 @@ const FarmAIEmptyState: React.FC = () => {
 
         {/* Footer */}
         <div className="text-center text-xs text-gray-400">
-          Tap a category to get started or type your question below
+          {t(
+            "footer",
+            "Tap a category to get started or type your question below"
+          )}
         </div>
       </div>
     </div>

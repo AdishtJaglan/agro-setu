@@ -3,4 +3,4 @@ main = "index.js"
 compatibility_date = "2025-04-06"
 
 [vars]
-# GEMINI_API_KEY = "AIzaSyCm5itK_5NRvIY72SfHwhvWdj0sqTfq52A" # Add this line in the Cloudflare dashboard or via `wrangler secret put GEMINI_API_KEY`
+

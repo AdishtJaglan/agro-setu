@@ -47,7 +47,7 @@ const Login = () => {
       <div className="w-full mx-auto rounded-xl p-6">
         <div className="flex items-center justify-center space-x-3">
           <h1 className="text-4xl font-bold text-green-700 tracking-tight">
-            Krishi Setu
+            Agro Setu
           </h1>
           <img
             src="/plant.webp"

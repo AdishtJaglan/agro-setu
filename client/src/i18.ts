@@ -6,6 +6,8 @@ import homeEn from "./locales/en/home.json";
 import jobsEn from "./locales/en/jobs.json";
 import homeHi from "./locales/hi/home.json";
 import jobsHi from "./locales/hi/jobs.json";
+import chatbotEn from "./locales/en/chatbot.json";
+import chatbotHi from "./locales/hi/chatbot.json";
 
 i18n
   .use(LanguageDetector)
@@ -13,16 +15,18 @@ i18n
   .init({
     fallbackLng: "en",
     debug: false,
-    ns: ["home", "jobs"], // define namespaces
+    ns: ["home", "jobs", "chatbot"], // define namespaces
     defaultNS: "home", // set a default namespace
     resources: {
       en: {
         home: homeEn,
         jobs: jobsEn,
+        chatbot: chatbotEn,
       },
       hi: {
         home: homeHi,
         jobs: jobsHi,
+        chatbot: chatbotHi,
       },
     },
     interpolation: {

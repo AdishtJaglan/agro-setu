@@ -8,6 +8,7 @@ import Sell from "./pages/shop/Sell";
 import Rent from "./pages/shop/Rent";
 import List from "./pages/shop/List";
 import Jobs from "./pages/Jobs";
+import Profile from "./pages/Profile";
 import "./i18";
 
 const App = () => {
@@ -19,6 +20,7 @@ const App = () => {
         <Route path="/help" element={<ChatBot />}></Route>
         <Route path="/shop" element={<Shop />}></Route>
         <Route path="/find" element={<Jobs />}></Route>
+        <Route path="/profile" element={<Profile />}></Route>
         <Route path="/shop/buy" element={<Buy />}></Route>
         <Route path="/shop/sell" element={<Sell />}></Route>
         <Route path="/shop/rent" element={<Rent />}></Route>

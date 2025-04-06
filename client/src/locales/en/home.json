@@ -18,29 +18,5 @@
   "financialOverview": "Financial Overview",
   "totalEarnings": "Total Earnings",
   "expectedHarvest": "Expected Harvest",
-  "next30Days": "Next 30 Days",
-
-  "jobBoardTitle": "Agricultural Job Board",
-  "searchPlaceholder": "Search jobs or locations...",
-  "category": {
-    "all": "All Jobs",
-    "farming": "Farming",
-    "labor": "Labor",
-    "agriculture": "Agriculture",
-    "harvest": "Harvest"
-  },
-  "job": "job",
-  "jobs": "jobs",
-  "found": "found",
-  "noJobsFound": "No jobs found",
-  "clearFilters": "Clear filters",
-  "posted": "Posted",
-  "apply": "Apply",
-  "jobType": {
-    "full-time": "Full-time",
-    "part-time": "Part-time",
-    "seasonal": "Seasonal",
-    "contract": "Contract"
-  },
-  "date": "April 6, 2025"
+  "next30Days": "Next 30 Days"
 }

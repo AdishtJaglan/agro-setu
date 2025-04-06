@@ -13,7 +13,7 @@ import TopNav from "../components/TopNav";
 import BottomNavbar from "../components/BottomNav";
 
 const Home: React.FC = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("home");
   const [activeTab] = useState("home");
 
   const quickActions = [

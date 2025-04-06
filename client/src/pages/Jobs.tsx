@@ -19,7 +19,7 @@ interface JobPosting {
 }
 
 const Jobs: React.FC = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("jobs");
 
   const jobListings: JobPosting[] = [
     {

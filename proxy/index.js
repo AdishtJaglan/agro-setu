@@ -1,44 +1,57 @@
-const express = require("express");
-const cors = require("cors");
-const { GoogleGenAI } = require("@google/genai");
-require("dotenv").config();
+import { GoogleGenerativeAI } from '@google/generative-ai';
 
-const app = express();
-const port = process.env.PORT || 3001;
+export default {
+  async fetch(request, env, ctx) {
+    // Handle CORS preflight requests
+    if (request.method === "OPTIONS") {
+      return new Response(null, {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "POST, OPTIONS",
+          "Access-Control-Allow-Headers": "Content-Type",
+        },
+      });
+    }
 
-app.use(
-  cors({
-    origin: "*",
-    optionsSuccessStatus: 200,
-  })
-);
+    // Only allow POST requests to /api/gemini
+    if (request.method !== "POST" || !request.url.endsWith("/api/gemini")) {
+      return new Response("Not Found", { status: 404 });
+    }
 
-app.use(express.json());
+    try {
+      const { userMessage } = await request.json();
+      
+      // Initialize Google Generative AI with the API key from environment
+      const genAI = new GoogleGenerativeAI(env.GEMINI_API_KEY);
+      const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+      
+      // Generate content
+      const result = await model.generateContent(userMessage);
+      const response = result.response;
+      const text = response.text();
 
-app.post("/api/gemini", async (req, res) => {
-  try {
-    const { userMessage } = req.body;
-    const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
-    const response = await ai.models.generateContent({
-      model: "gemini-2.0-flash",
-      contents: userMessage,
-    });
-
-    const aiResponse = response.text;
-
-    res.json({ message: aiResponse });
-  } catch (error) {
-    console.error(
-      "Error proxying request:",
-      error.response?.data || error.message
-    );
-    res.status(500).json({
-      error: "Failed to process your request",
-      details: error.message,
-    });
-  }
-});
-
-app.listen(port, () => {
-  console.log(`Proxy server running on port ${port}`);
-});
+      // Return the response
+      return new Response(JSON.stringify({ message: text }), {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+      });
+    } catch (error) {
+      console.error("Error:", error);
+      return new Response(
+        JSON.stringify({
+          error: "Failed to process your request",
+          details: error.message,
+        }),
+        {
+          status: 500,
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+          },
+        }
+      );
+    }
+  },
+};

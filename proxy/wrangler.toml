@@ -1,0 +1,6 @@
+name = "agro-setu"
+main = "index.js"
+compatibility_date = "2025-04-06"
+
+[vars]
+

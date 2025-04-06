@@ -45,9 +45,16 @@ const Login = () => {
   return (
     <div className="min-h-screen bg-grey-100 flex flex-col justify-center px-4 py-8">
       <div className="w-full mx-auto rounded-xl p-6">
-        <h1 className="text-3xl font-bold text-center text-green-800 mb-4">
-          Farmer Digital Platform
-        </h1>
+        <div className="flex items-center justify-center space-x-3">
+          <h1 className="text-4xl font-bold text-green-700 tracking-tight">
+            AgroSetu
+          </h1>
+          <img
+            src="/plant.webp"
+            alt="Plant logo"
+            className="h-12 w-12 transform transition-transform duration-300 hover:scale-110 hover:rotate-3"
+          />
+        </div>
 
         <h3 className="text-md text-center mb-6 mx-auto bg-grey-600 font-normal">
           Start Your Agricultral Journey

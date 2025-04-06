@@ -10,7 +10,7 @@ import {
   AudioLines,
   Leaf,
 } from "lucide-react";
-import { GoogleGenAI } from "@google/genai";
+
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
@@ -106,15 +106,24 @@ const ChatBot: React.FC = () => {
 
   const fetchGeminiResponse = async (userMessage: string): Promise<void> => {
     setLoading(true);
-    const ai = new GoogleGenAI({ apiKey: `${import.meta.env.VITE_API_KEY}` });
 
     try {
-      const response = await ai.models.generateContent({
-        model: "gemini-2.0-flash",
-        contents: userMessage,
+      const response = await fetch("http://localhost:3001/api/gemini", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userMessage }),
       });
 
-      const aiResponse = response.text || t("chatbot.unknownResponse");
+      console.log(response);
+
+      if (!response.ok) {
+        throw new Error(`Server responded with status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      const aiResponse = data.message || t("chatbot.unknownResponse");
 
       setMessages((prev) => [
         ...prev,

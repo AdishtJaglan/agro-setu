@@ -1,10 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, ChangeEvent, FormEvent } from "react";
 import TopNav from "../../components/TopNav";
 import BottomNavbar from "../../components/BottomNav";
 import { Camera, Package, Leaf, Tractor, FileText, Tag, X } from "lucide-react";
 
-const Sell = () => {
-  const [formData, setFormData] = useState({
+interface FormDataType {
+  name: string;
+  category: string;
+  price: string;
+  image: File | null;
+  description: string;
+}
+
+interface CategoryType {
+  value: string;
+  label: string;
+  icon: React.ReactNode;
+}
+
+const Sell: React.FC = () => {
+  const [formData, setFormData] = useState<FormDataType>({
     name: "",
     category: "crops",
     price: "",
@@ -12,17 +26,19 @@ const Sell = () => {
     description: "",
   });
 
-  const [previewImage, setPreviewImage] = useState(null);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [step, setStep] = useState(1);
+  const [previewImage, setPreviewImage] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const [step, setStep] = useState<number>(1);
 
-  const categories = [
+  const categories: CategoryType[] = [
     { value: "amenities", label: "Amenities", icon: <Package size={20} /> },
     { value: "crops", label: "Crops", icon: <Leaf size={20} /> },
     { value: "equipment", label: "Equipment", icon: <Tractor size={20} /> },
   ];
 
-  const handleChange = (e) => {
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
@@ -30,9 +46,10 @@ const Sell = () => {
     });
   };
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
+  const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (files && files[0]) {
+      const file = files[0];
       setFormData({
         ...formData,
         image: file,
@@ -41,7 +58,9 @@ const Sell = () => {
       // Create preview
       const reader = new FileReader();
       reader.onload = () => {
-        setPreviewImage(reader.result);
+        if (typeof reader.result === "string") {
+          setPreviewImage(reader.result);
+        }
       };
       reader.readAsDataURL(file);
     }
@@ -55,7 +74,7 @@ const Sell = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
@@ -253,7 +272,7 @@ const Sell = () => {
             value={formData.description}
             onChange={handleChange}
             placeholder="Add details about your product..."
-            rows="4"
+            rows={4}
             className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 bg-gray-50"
           />
         </div>
@@ -312,6 +331,7 @@ const Sell = () => {
               <button
                 onClick={clearImage}
                 className="absolute top-2 right-2 bg-white p-1 rounded-full shadow-md hover:bg-gray-100"
+                type="button"
               >
                 <X size={20} className="text-gray-700" />
               </button>
@@ -379,6 +399,7 @@ const Sell = () => {
         <button
           onClick={() => setStep(1)}
           className="w-full py-4 bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 transition-colors shadow-md"
+          type="button"
         >
           List Another Item
         </button>

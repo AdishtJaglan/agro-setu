@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Phone, Mail, Lock } from "lucide-react";
+import { Phone, Mail, Lock, User } from "lucide-react";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -35,6 +35,11 @@ const Login = () => {
     e.preventDefault();
     navigate("/home");
     console.log("Login submitted", formData);
+  };
+
+  const handleGuestLogin = () => {
+    navigate("/home");
+    console.log("Guest login");
   };
 
   return (
@@ -113,6 +118,17 @@ const Login = () => {
             Login
           </button>
         </form>
+
+        {/* Guest Login Button */}
+        <div className="mt-4">
+          <button
+            onClick={handleGuestLogin}
+            className="w-full flex items-center justify-center bg-gray-200 text-gray-700 py-2 rounded-md hover:bg-gray-300 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-gray-400"
+          >
+            <User className="h-5 w-5 mr-2" />
+            Continue as Guest
+          </button>
+        </div>
 
         {/* Additional Links */}
         <div className="mt-10 text-center">

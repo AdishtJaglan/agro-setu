@@ -17,6 +17,7 @@ import {
   Camera,
   X,
 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 interface ListingFormData {
   name: string;
@@ -36,6 +37,7 @@ interface AmenityOption {
 }
 
 const List: React.FC = () => {
+  const { t } = useTranslation("list");
   const [formData, setFormData] = useState<ListingFormData>({
     name: "",
     location: "",
@@ -55,42 +57,58 @@ const List: React.FC = () => {
     value: "day" | "week" | "month" | "year";
     label: string;
   }[] = [
-    { value: "day", label: "Per Day" },
-    { value: "week", label: "Per Week" },
-    { value: "month", label: "Per Month" },
-    { value: "year", label: "Per Year" },
+    { value: "day", label: t("period.day", "Per Day") },
+    { value: "week", label: t("period.week", "Per Week") },
+    { value: "month", label: t("period.month", "Per Month") },
+    { value: "year", label: t("period.year", "Per Year") },
   ];
 
   const amenityOptions: AmenityOption[] = [
     {
       value: "Temperature Control",
-      label: "Temperature Control",
+      label: t("amenities.temperatureControl", "Temperature Control"),
       icon: <Thermometer size={18} />,
     },
     {
       value: "Inventory System",
-      label: "Inventory System",
+      label: t("amenities.inventorySystem", "Inventory System"),
       icon: <Package size={18} />,
     },
     {
       value: "Forklift Available",
-      label: "Forklift Available",
+      label: t("amenities.forkliftAvailable", "Forklift Available"),
       icon: <Truck size={18} />,
     },
-    { value: "24/7 Access", label: "24/7 Access", icon: <Clock size={18} /> },
+    {
+      value: "24/7 Access",
+      label: t("amenities.access24x7", "24/7 Access"),
+      icon: <Clock size={18} />,
+    },
     {
       value: "Security System",
-      label: "Security System",
+      label: t("amenities.securitySystem", "Security System"),
       icon: <Shield size={18} />,
     },
-    { value: "Loading Dock", label: "Loading Dock", icon: <Truck size={18} /> },
+    {
+      value: "Loading Dock",
+      label: t("amenities.loadingDock", "Loading Dock"),
+      icon: <Truck size={18} />,
+    },
     {
       value: "Flexible Terms",
-      label: "Flexible Terms",
+      label: t("amenities.flexibleTerms", "Flexible Terms"),
       icon: <FileText size={18} />,
     },
-    { value: "Easy Access", label: "Easy Access", icon: <MapPin size={18} /> },
-    { value: "City Center", label: "City Center", icon: <MapPin size={18} /> },
+    {
+      value: "Easy Access",
+      label: t("amenities.easyAccess", "Easy Access"),
+      icon: <MapPin size={18} />,
+    },
+    {
+      value: "City Center",
+      label: t("amenities.cityCenter", "City Center"),
+      icon: <MapPin size={18} />,
+    },
   ];
 
   const handleChange = (
@@ -188,7 +206,7 @@ const List: React.FC = () => {
           >
             <FileText size={20} />
           </div>
-          <span className="text-xs mt-1">Details</span>
+          <span className="text-xs mt-1">{t("step.details", "Details")}</span>
         </div>
 
         <div className="flex-1 h-1 mx-2 bg-gray-200">
@@ -206,7 +224,7 @@ const List: React.FC = () => {
           >
             <Camera size={20} />
           </div>
-          <span className="text-xs mt-1">Media</span>
+          <span className="text-xs mt-1">{t("step.media", "Media")}</span>
         </div>
 
         <div className="flex-1 h-1 mx-2 bg-gray-200">
@@ -224,7 +242,7 @@ const List: React.FC = () => {
           >
             <Tag size={20} />
           </div>
-          <span className="text-xs mt-1">Publish</span>
+          <span className="text-xs mt-1">{t("step.publish", "Publish")}</span>
         </div>
       </div>
     );
@@ -233,7 +251,9 @@ const List: React.FC = () => {
   const renderStep1 = () => {
     return (
       <div className="bg-white rounded-lg shadow-lg p-6">
-        <h2 className="text-lg font-bold mb-4">Facility Details</h2>
+        <h2 className="text-lg font-bold mb-4">
+          {t("step1.facilityDetails", "Facility Details")}
+        </h2>
 
         {/* Name */}
         <div className="mb-6">
@@ -241,7 +261,7 @@ const List: React.FC = () => {
             htmlFor="name"
             className="block text-sm font-medium mb-2 text-gray-700"
           >
-            Facility Name
+            {t("step1.facilityNameLabel", "Facility Name")}
           </label>
           <div className="relative">
             <input
@@ -250,7 +270,10 @@ const List: React.FC = () => {
               name="name"
               value={formData.name}
               onChange={handleChange}
-              placeholder="e.g. Industrial Cold Storage Facility"
+              placeholder={t(
+                "step1.facilityNamePlaceholder",
+                "e.g. Industrial Cold Storage Facility"
+              )}
               className="w-full p-4 pl-12 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50"
               required
             />
@@ -266,7 +289,7 @@ const List: React.FC = () => {
             htmlFor="location"
             className="block text-sm font-medium mb-2 text-gray-700"
           >
-            Location
+            {t("step1.locationLabel", "Location")}
           </label>
           <div className="relative">
             <input
@@ -275,7 +298,10 @@ const List: React.FC = () => {
               name="location"
               value={formData.location}
               onChange={handleChange}
-              placeholder="e.g. Pune, Maharashtra"
+              placeholder={t(
+                "step1.locationPlaceholder",
+                "e.g. Pune, Maharashtra"
+              )}
               className="w-full p-4 pl-12 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50"
               required
             />
@@ -291,7 +317,7 @@ const List: React.FC = () => {
             htmlFor="capacity"
             className="block text-sm font-medium mb-2 text-gray-700"
           >
-            Capacity (in tons)
+            {t("step1.capacityLabel", "Capacity (in tons)")}
           </label>
           <div className="relative">
             <input
@@ -300,7 +326,7 @@ const List: React.FC = () => {
               name="capacity"
               value={formData.capacity}
               onChange={handleChange}
-              placeholder="e.g. 5000"
+              placeholder={t("step1.capacityPlaceholder", "e.g. 5000")}
               min="0"
               className="w-full p-4 pl-12 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50"
               required
@@ -318,7 +344,7 @@ const List: React.FC = () => {
               htmlFor="price"
               className="block text-sm font-medium mb-2 text-gray-700"
             >
-              Price (₹)
+              {t("step1.priceLabel", "Price (₹)")}
             </label>
             <div className="relative">
               <input
@@ -327,7 +353,7 @@ const List: React.FC = () => {
                 name="price"
                 value={formData.price}
                 onChange={handleChange}
-                placeholder="e.g. 200000"
+                placeholder={t("step1.pricePlaceholder", "e.g. 200000")}
                 min="0"
                 className="w-full p-4 pl-12 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50"
                 required
@@ -343,7 +369,7 @@ const List: React.FC = () => {
               htmlFor="period"
               className="block text-sm font-medium mb-2 text-gray-700"
             >
-              Rental Period
+              {t("step1.periodLabel", "Rental Period")}
             </label>
             <div className="relative">
               <select
@@ -388,14 +414,17 @@ const List: React.FC = () => {
             htmlFor="description"
             className="block text-sm font-medium mb-2 text-gray-700"
           >
-            Description (Optional)
+            {t("step1.descriptionLabel", "Description (Optional)")}
           </label>
           <textarea
             id="description"
             name="description"
             value={formData.description}
             onChange={handleChange}
-            placeholder="Add details about your facility..."
+            placeholder={t(
+              "step1.descriptionPlaceholder",
+              "Add details about your facility..."
+            )}
             rows={4}
             className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50"
           />
@@ -406,7 +435,7 @@ const List: React.FC = () => {
           onClick={nextStep}
           className="w-full py-4 bg-green-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors shadow-md"
         >
-          Continue to Add Photos & Amenities
+          {t("step1.continue", "Continue to Add Photos & Amenities")}
         </button>
       </div>
     );
@@ -415,28 +444,33 @@ const List: React.FC = () => {
   const renderStep2 = () => {
     return (
       <div className="bg-white rounded-lg shadow-lg p-6">
-        <h2 className="text-lg font-bold mb-4">Photos & Amenities</h2>
+        <h2 className="text-lg font-bold mb-4">
+          {t("step2.title", "Photos & Amenities")}
+        </h2>
 
         {/* Image Upload */}
         <div className="mb-8">
           <h3 className="text-md font-medium mb-3 text-gray-700">
-            Facility Photos
+            {t("step2.photosLabel", "Facility Photos")}
           </h3>
 
           {!previewImage ? (
             <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 flex flex-col items-center justify-center">
               <Camera size={48} className="text-gray-400 mb-4" />
               <h3 className="text-lg font-medium text-gray-700 mb-2">
-                Upload Facility Images
+                {t("step2.uploadPrompt", "Upload Facility Images")}
               </h3>
               <p className="text-sm text-gray-500 mb-4 text-center">
-                Drag and drop your image here, or click to browse
+                {t(
+                  "step2.uploadInstructions",
+                  "Drag and drop your image here, or click to browse"
+                )}
               </p>
               <label
                 htmlFor="image"
                 className="px-4 py-2 bg-blue-100 text-blue-700 rounded-lg cursor-pointer hover:bg-blue-200 transition-colors"
               >
-                Browse Files
+                {t("step2.browseFiles", "Browse Files")}
                 <input
                   type="file"
                   id="image"
@@ -447,7 +481,10 @@ const List: React.FC = () => {
                 />
               </label>
               <p className="text-xs text-gray-500 mt-4">
-                Maximum file size: 5MB | Formats: JPG, PNG
+                {t(
+                  "step2.fileInfo",
+                  "Maximum file size: 5MB | Formats: JPG, PNG"
+                )}
               </p>
             </div>
           ) : (
@@ -455,7 +492,7 @@ const List: React.FC = () => {
               <div className="relative mb-4">
                 <img
                   src={previewImage}
-                  alt="Preview"
+                  alt={t("step2.previewAlt", "Preview")}
                   className="w-full h-64 object-cover rounded-lg"
                 />
                 <button
@@ -467,7 +504,10 @@ const List: React.FC = () => {
                 </button>
               </div>
               <p className="text-sm text-gray-600">
-                Your main facility image. This will be displayed in the listing.
+                {t(
+                  "step2.previewInfo",
+                  "Your main facility image. This will be displayed in the listing."
+                )}
               </p>
             </div>
           )}
@@ -476,7 +516,7 @@ const List: React.FC = () => {
         {/* Amenities */}
         <div className="mb-6">
           <h3 className="text-md font-medium mb-3 text-gray-700">
-            Available Amenities
+            {t("step2.amenitiesLabel", "Available Amenities")}
           </h3>
           <div className="grid grid-cols-2 gap-3">
             {amenityOptions.map((amenity) => (
@@ -522,7 +562,7 @@ const List: React.FC = () => {
             onClick={prevStep}
             className="flex-1 py-4 bg-gray-200 text-gray-700 rounded-lg font-medium hover:bg-gray-300 transition-colors"
           >
-            Back
+            {t("step2.back", "Back")}
           </button>
           <button
             type="button"
@@ -534,7 +574,9 @@ const List: React.FC = () => {
                 : "bg-green-600 text-white hover:bg-blue-700"
             } transition-colors`}
           >
-            {isSubmitting ? "Publishing..." : "Publish Listing"}
+            {isSubmitting
+              ? t("step2.publishing", "Publishing...")
+              : t("step2.publishListing", "Publish Listing")}
           </button>
         </div>
       </div>
@@ -563,17 +605,19 @@ const List: React.FC = () => {
           </div>
         </div>
         <h2 className="text-xl font-bold text-gray-800 mb-2">
-          Listing Published!
+          {t("step3.listingPublished", "Listing Published!")}
         </h2>
         <p className="text-gray-600 text-center mb-6">
-          Your facility has been successfully listed and is now available for
-          users to rent.
+          {t(
+            "step3.successMessage",
+            "Your facility has been successfully listed and is now available for users to rent."
+          )}
         </p>
         <button
           onClick={() => setStep(1)}
           className="w-full py-4 bg-green-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors shadow-md"
         >
-          List Another Facility
+          {t("step3.listAnother", "List Another Facility")}
         </button>
       </div>
     );
@@ -584,7 +628,7 @@ const List: React.FC = () => {
       <TopNav />
       <div className="bg-gray-100 min-h-screen py-6 px-4 pb-24">
         <h1 className="text-2xl font-bold mb-6 text-center">
-          List Your Storage Facility
+          {t("header", "List Your Storage Facility")}
         </h1>
 
         {renderStepIndicator()}

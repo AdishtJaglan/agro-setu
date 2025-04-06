@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import TopNav from "../components/TopNav";
 import BottomNavbar from "../components/BottomNav";
 import { MapPin, Briefcase, Search } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 interface JobPosting {
   id: number;
@@ -18,6 +19,8 @@ interface JobPosting {
 }
 
 const Jobs: React.FC = () => {
+  const { t } = useTranslation();
+
   const jobListings: JobPosting[] = [
     {
       id: 1,
@@ -134,13 +137,13 @@ const Jobs: React.FC = () => {
       <TopNav />
 
       <div className="sticky top-0 z-10 bg-emerald-600 text-white p-4">
-        <h1 className="text-xl font-bold mb-3">Agricultural Job Board</h1>
+        <h1 className="text-xl font-bold mb-3">{t("jobBoardTitle")}</h1>
 
         {/* Search bar */}
         <div className="relative mb-2">
           <input
             type="text"
-            placeholder="Search jobs or locations..."
+            placeholder={t("searchPlaceholder")}
             className="w-full bg-white/20 border border-white/30 rounded-lg py-2 pl-9 pr-3 text-white placeholder-emerald-100 focus:outline-none focus:ring-1 focus:ring-white/50"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
@@ -151,64 +154,27 @@ const Jobs: React.FC = () => {
 
       {/* Filter chips */}
       <div className="px-4 py-2 overflow-x-auto flex gap-2 bg-gray-50">
-        <button
-          onClick={() => setFilter("all")}
-          className={`px-3 py-1 rounded-lg text-sm whitespace-nowrap ${
-            filter === "all"
-              ? "bg-emerald-600 text-white"
-              : "bg-white border border-gray-200 text-gray-700"
-          }`}
-        >
-          All Jobs
-        </button>
-        <button
-          onClick={() => setFilter("farming")}
-          className={`px-3 py-1 rounded-lg text-sm whitespace-nowrap ${
-            filter === "farming"
-              ? "bg-emerald-600 text-white"
-              : "bg-white border border-gray-200 text-gray-700"
-          }`}
-        >
-          Farming
-        </button>
-        <button
-          onClick={() => setFilter("labor")}
-          className={`px-3 py-1 rounded-lg text-sm whitespace-nowrap ${
-            filter === "labor"
-              ? "bg-emerald-600 text-white"
-              : "bg-white border border-gray-200 text-gray-700"
-          }`}
-        >
-          Labor
-        </button>
-        <button
-          onClick={() => setFilter("agriculture")}
-          className={`px-3 py-1 rounded-lg text-sm whitespace-nowrap ${
-            filter === "agriculture"
-              ? "bg-emerald-600 text-white"
-              : "bg-white border border-gray-200 text-gray-700"
-          }`}
-        >
-          Agriculture
-        </button>
-        <button
-          onClick={() => setFilter("harvest")}
-          className={`px-3 py-1 rounded-lg text-sm whitespace-nowrap ${
-            filter === "harvest"
-              ? "bg-emerald-600 text-white"
-              : "bg-white border border-gray-200 text-gray-700"
-          }`}
-        >
-          Harvest
-        </button>
+        {["all", "farming", "labor", "agriculture", "harvest"].map((cat) => (
+          <button
+            key={cat}
+            onClick={() => setFilter(cat)}
+            className={`px-3 py-1 rounded-lg text-sm whitespace-nowrap ${
+              filter === cat
+                ? "bg-emerald-600 text-white"
+                : "bg-white border border-gray-200 text-gray-700"
+            }`}
+          >
+            {t(`category.${cat}`)}
+          </button>
+        ))}
       </div>
 
       <main className="px-4 pb-20 pt-2">
         {/* Results count */}
         <div className="mb-3">
           <p className="text-gray-500 text-xs">
-            {filteredJobs.length} {filteredJobs.length === 1 ? "job" : "jobs"}{" "}
-            found
+            {filteredJobs.length}{" "}
+            {filteredJobs.length === 1 ? t("job") : t("jobs")} {t("found")}
           </p>
         </div>
 
@@ -216,7 +182,7 @@ const Jobs: React.FC = () => {
         <div className="space-y-3">
           {filteredJobs.length === 0 ? (
             <div className="bg-white rounded-lg p-4 text-center">
-              <p className="text-gray-500">No jobs found</p>
+              <p className="text-gray-500">{t("noJobsFound")}</p>
               <button
                 onClick={() => {
                   setFilter("all");
@@ -224,7 +190,7 @@ const Jobs: React.FC = () => {
                 }}
                 className="mt-2 text-emerald-600 text-sm"
               >
-                Clear filters
+                {t("clearFilters")}
               </button>
             </div>
           ) : (
@@ -253,7 +219,7 @@ const Jobs: React.FC = () => {
                         }`}
                       >
                         <Briefcase className="mr-1 h-3 w-3" />
-                        {job.type}
+                        {t(`jobType.${job.type.toLowerCase()}`)}
                       </span>
                     </div>
 
@@ -278,10 +244,10 @@ const Jobs: React.FC = () => {
 
                   <div className="mt-3 flex justify-between items-center">
                     <span className="text-xs text-gray-500">
-                      Posted: {job.postedDate}
+                      {t("posted")}: {job.postedDate}
                     </span>
                     <button className="bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-1 rounded-md text-sm">
-                      Apply
+                      {t("apply")}
                     </button>
                   </div>
                 </div>

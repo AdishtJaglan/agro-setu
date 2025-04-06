@@ -252,7 +252,7 @@ const List: React.FC = () => {
     return (
       <div className="bg-white rounded-lg shadow-lg p-6">
         <h2 className="text-lg font-bold mb-4">
-          {t("step1.facilityDetails", "Facility Details")}
+          {t("step.facilityDetails", "Facility Details")}
         </h2>
 
         {/* Name */}
@@ -261,7 +261,7 @@ const List: React.FC = () => {
             htmlFor="name"
             className="block text-sm font-medium mb-2 text-gray-700"
           >
-            {t("step1.facilityNameLabel", "Facility Name")}
+            {t("step.facilityNameLabel", "Facility Name")}
           </label>
           <div className="relative">
             <input
@@ -271,7 +271,7 @@ const List: React.FC = () => {
               value={formData.name}
               onChange={handleChange}
               placeholder={t(
-                "step1.facilityNamePlaceholder",
+                "step.facilityNamePlaceholder",
                 "e.g. Industrial Cold Storage Facility"
               )}
               className="w-full p-4 pl-12 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50"
@@ -289,7 +289,7 @@ const List: React.FC = () => {
             htmlFor="location"
             className="block text-sm font-medium mb-2 text-gray-700"
           >
-            {t("step1.locationLabel", "Location")}
+            {t("step.locationLabel", "Location")}
           </label>
           <div className="relative">
             <input
@@ -299,7 +299,7 @@ const List: React.FC = () => {
               value={formData.location}
               onChange={handleChange}
               placeholder={t(
-                "step1.locationPlaceholder",
+                "step.locationPlaceholder",
                 "e.g. Pune, Maharashtra"
               )}
               className="w-full p-4 pl-12 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50"
@@ -317,7 +317,7 @@ const List: React.FC = () => {
             htmlFor="capacity"
             className="block text-sm font-medium mb-2 text-gray-700"
           >
-            {t("step1.capacityLabel", "Capacity (in tons)")}
+            {t("step.capacityLabel", "Capacity (in tons)")}
           </label>
           <div className="relative">
             <input
@@ -326,7 +326,7 @@ const List: React.FC = () => {
               name="capacity"
               value={formData.capacity}
               onChange={handleChange}
-              placeholder={t("step1.capacityPlaceholder", "e.g. 5000")}
+              placeholder={t("step.capacityPlaceholder", "e.g. 5000")}
               min="0"
               className="w-full p-4 pl-12 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50"
               required
@@ -344,7 +344,7 @@ const List: React.FC = () => {
               htmlFor="price"
               className="block text-sm font-medium mb-2 text-gray-700"
             >
-              {t("step1.priceLabel", "Price (₹)")}
+              {t("step.priceLabel", "Price (₹)")}
             </label>
             <div className="relative">
               <input
@@ -353,7 +353,7 @@ const List: React.FC = () => {
                 name="price"
                 value={formData.price}
                 onChange={handleChange}
-                placeholder={t("step1.pricePlaceholder", "e.g. 200000")}
+                placeholder={t("step.pricePlaceholder", "e.g. 200000")}
                 min="0"
                 className="w-full p-4 pl-12 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50"
                 required
@@ -369,7 +369,7 @@ const List: React.FC = () => {
               htmlFor="period"
               className="block text-sm font-medium mb-2 text-gray-700"
             >
-              {t("step1.periodLabel", "Rental Period")}
+              {t("step.periodLabel", "Rental Period")}
             </label>
             <div className="relative">
               <select
@@ -414,7 +414,7 @@ const List: React.FC = () => {
             htmlFor="description"
             className="block text-sm font-medium mb-2 text-gray-700"
           >
-            {t("step1.descriptionLabel", "Description (Optional)")}
+            {t("step.descriptionLabel", "Description (Optional)")}
           </label>
           <textarea
             id="description"
@@ -422,7 +422,7 @@ const List: React.FC = () => {
             value={formData.description}
             onChange={handleChange}
             placeholder={t(
-              "step1.descriptionPlaceholder",
+              "step.descriptionPlaceholder",
               "Add details about your facility..."
             )}
             rows={4}
@@ -435,7 +435,7 @@ const List: React.FC = () => {
           onClick={nextStep}
           className="w-full py-4 bg-green-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors shadow-md"
         >
-          {t("step1.continue", "Continue to Add Photos & Amenities")}
+          {t("step.continue", "Continue to Add Photos & Amenities")}
         </button>
       </div>
     );
@@ -445,24 +445,24 @@ const List: React.FC = () => {
     return (
       <div className="bg-white rounded-lg shadow-lg p-6">
         <h2 className="text-lg font-bold mb-4">
-          {t("step2.title", "Photos & Amenities")}
+          {t("step.title", "Photos & Amenities")}
         </h2>
 
         {/* Image Upload */}
         <div className="mb-8">
           <h3 className="text-md font-medium mb-3 text-gray-700">
-            {t("step2.photosLabel", "Facility Photos")}
+            {t("step.photosLabel", "Facility Photos")}
           </h3>
 
           {!previewImage ? (
             <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 flex flex-col items-center justify-center">
               <Camera size={48} className="text-gray-400 mb-4" />
               <h3 className="text-lg font-medium text-gray-700 mb-2">
-                {t("step2.uploadPrompt", "Upload Facility Images")}
+                {t("step.uploadPrompt", "Upload Facility Images")}
               </h3>
               <p className="text-sm text-gray-500 mb-4 text-center">
                 {t(
-                  "step2.uploadInstructions",
+                  "step.uploadInstructions",
                   "Drag and drop your image here, or click to browse"
                 )}
               </p>
@@ -470,7 +470,7 @@ const List: React.FC = () => {
                 htmlFor="image"
                 className="px-4 py-2 bg-blue-100 text-blue-700 rounded-lg cursor-pointer hover:bg-blue-200 transition-colors"
               >
-                {t("step2.browseFiles", "Browse Files")}
+                {t("step.browseFiles", "Browse Files")}
                 <input
                   type="file"
                   id="image"
@@ -482,7 +482,7 @@ const List: React.FC = () => {
               </label>
               <p className="text-xs text-gray-500 mt-4">
                 {t(
-                  "step2.fileInfo",
+                  "step.fileInfo",
                   "Maximum file size: 5MB | Formats: JPG, PNG"
                 )}
               </p>
@@ -492,7 +492,7 @@ const List: React.FC = () => {
               <div className="relative mb-4">
                 <img
                   src={previewImage}
-                  alt={t("step2.previewAlt", "Preview")}
+                  alt={t("step.previewAlt", "Preview")}
                   className="w-full h-64 object-cover rounded-lg"
                 />
                 <button
@@ -505,7 +505,7 @@ const List: React.FC = () => {
               </div>
               <p className="text-sm text-gray-600">
                 {t(
-                  "step2.previewInfo",
+                  "step.previewInfo",
                   "Your main facility image. This will be displayed in the listing."
                 )}
               </p>
@@ -516,7 +516,7 @@ const List: React.FC = () => {
         {/* Amenities */}
         <div className="mb-6">
           <h3 className="text-md font-medium mb-3 text-gray-700">
-            {t("step2.amenitiesLabel", "Available Amenities")}
+            {t("step.amenitiesLabel", "Available Amenities")}
           </h3>
           <div className="grid grid-cols-2 gap-3">
             {amenityOptions.map((amenity) => (
@@ -562,7 +562,7 @@ const List: React.FC = () => {
             onClick={prevStep}
             className="flex-1 py-4 bg-gray-200 text-gray-700 rounded-lg font-medium hover:bg-gray-300 transition-colors"
           >
-            {t("step2.back", "Back")}
+            {t("step.back", "Back")}
           </button>
           <button
             type="button"
@@ -575,8 +575,8 @@ const List: React.FC = () => {
             } transition-colors`}
           >
             {isSubmitting
-              ? t("step2.publishing", "Publishing...")
-              : t("step2.publishListing", "Publish Listing")}
+              ? t("step.publishing", "Publishing...")
+              : t("step.publishListing", "Publish Listing")}
           </button>
         </div>
       </div>
@@ -605,11 +605,11 @@ const List: React.FC = () => {
           </div>
         </div>
         <h2 className="text-xl font-bold text-gray-800 mb-2">
-          {t("step3.listingPublished", "Listing Published!")}
+          {t("step.listingPublished", "Listing Published!")}
         </h2>
         <p className="text-gray-600 text-center mb-6">
           {t(
-            "step3.successMessage",
+            "step.successMessage",
             "Your facility has been successfully listed and is now available for users to rent."
           )}
         </p>
@@ -617,7 +617,7 @@ const List: React.FC = () => {
           onClick={() => setStep(1)}
           className="w-full py-4 bg-green-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors shadow-md"
         >
-          {t("step3.listAnother", "List Another Facility")}
+          {t("step.listAnother", "List Another Facility")}
         </button>
       </div>
     );

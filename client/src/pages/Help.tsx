@@ -26,12 +26,46 @@ interface Message {
   timestamp: number;
 }
 
+interface MarkdownComponentProps {
+  inline?: boolean;
+  className?: string;
+  children: React.ReactNode;
+}
+
+interface SpeechRecognitionEvent extends Event {
+  resultIndex: number;
+  results: {
+    [index: number]: {
+      isFinal: boolean;
+      [index: number]: {
+        transcript: string;
+      };
+    };
+    length: number;
+  };
+}
+
+interface SpeechRecognitionErrorEvent extends Event {
+  error: string;
+}
+
+interface SpeechRecognition extends EventTarget {
+  continuous: boolean;
+  interimResults: boolean;
+  lang: string;
+  start: () => void;
+  stop: () => void;
+  onresult: (event: SpeechRecognitionEvent) => void;
+  onerror: (event: SpeechRecognitionErrorEvent) => void;
+  onend: () => void;
+}
+
 const ChatBot: React.FC = () => {
   const { t } = useTranslation("chatbot");
   const [messages, setMessages] = useState<Message[]>([]);
-  const [input, setInput] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [listen, setListen] = useState(false);
+  const [input, setInput] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
+  const [listen, setListen] = useState<boolean>(false);
   const recognitionRef = useRef<SpeechRecognition | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -110,7 +144,7 @@ const ChatBot: React.FC = () => {
     }
   };
 
-  const handleSendMessage = () => {
+  const handleSendMessage = (): void => {
     if (!input.trim()) return;
 
     const newMessage: Message = {
@@ -125,27 +159,27 @@ const ChatBot: React.FC = () => {
     fetchGeminiResponse(input);
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>): void => {
     if (e.key === "Enter" && !loading) {
       handleSendMessage();
     }
   };
 
-  const startListening = () => {
+  const startListening = (): void => {
     if (recognitionRef.current && !listen) {
       recognitionRef.current.start();
+      setListen(true);
     }
   };
 
-  const stopListening = () => {
+  const stopListening = (): void => {
     if (recognitionRef.current && listen) {
       recognitionRef.current.stop();
+      setListen(false);
     }
   };
 
-  const handleSpeechToText = () => {
-    setListen(!listen);
-
+  const handleSpeechToText = (): void => {
     if (!listen) {
       console.log("listening");
       startListening();
@@ -154,24 +188,22 @@ const ChatBot: React.FC = () => {
     }
   };
 
-  const handleFileAdd = () => {
+  const handleFileAdd = (): void => {
     fileInputRef.current?.click();
   };
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ): void => {
     const files = event.target.files;
     if (files && files.length > 0) {
       console.log(t("chatbot.selectedFiles"), files);
     }
   };
 
-  const MarkdownComponents = {
-    code({
-      inline,
-      className,
-      children,
-      ...props
-    }: React.HTMLAttributes<HTMLElement> & { inline?: boolean }) {
+  // Properly type the Markdown components
+  const MarkdownComponents: Record<string, React.FC<MarkdownComponentProps>> = {
+    code({ inline, className, children, ...props }: MarkdownComponentProps) {
       const match = /language-(\w+)/.exec(className || "");
       return !inline && match ? (
         <SyntaxHighlighter

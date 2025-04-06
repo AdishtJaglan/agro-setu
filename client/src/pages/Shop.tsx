@@ -7,32 +7,30 @@ import {
 } from "lucide-react";
 import TopNav from "../components/TopNav";
 import BottomNavbar from "../components/BottomNav";
+import { useTranslation } from "react-i18next";
 
-const Shop = () => {
+const Shop: React.FC = () => {
+  const { t } = useTranslation("shop");
   const navigate = useNavigate();
 
   const data = [
     {
-      heading: "Buy",
-      text: "Browse crops, farming equipment, and more",
+      key: "buy",
       icon: ShoppingCart,
       path: "/shop/buy",
     },
     {
-      heading: "Sell",
-      text: "List your crops, farming equipment for sale",
+      key: "sell",
       icon: Tags,
       path: "/shop/sell",
     },
     {
-      heading: "Rent",
-      text: "Find rental cold storage spaces",
+      key: "rent",
       icon: Building,
       path: "/shop/rent",
     },
     {
-      heading: "List",
-      text: "List your rental cold storage spaces",
+      key: "list",
       icon: ChartNoAxesCombined,
       path: "/shop/list",
     },
@@ -46,11 +44,10 @@ const Shop = () => {
       {/* Main Content */}
       <main className="flex-1 p-6 flex flex-col items-center justify-start mt-6">
         <h2 className="text-2xl font-semibold text-gray-800 mb-8 text-center">
-          What would you like to do?
+          {t("title", "What would you like to do?")}
         </h2>
 
         <div className="grid grid-cols-1 gap-6 w-full max-w-md">
-          {/* Buy Option */}
           {data.map((entry, idx) => (
             <button
               key={idx}
@@ -63,9 +60,9 @@ const Shop = () => {
                 </div>
                 <div>
                   <h3 className="font-bold text-lg text-gray-800">
-                    {entry.heading}
+                    {t(`${entry.key}.heading`)}
                   </h3>
-                  <p className="text-gray-600">{entry.text}</p>
+                  <p className="text-gray-600">{t(`${entry.key}.text`)}</p>
                 </div>
               </div>
             </button>
